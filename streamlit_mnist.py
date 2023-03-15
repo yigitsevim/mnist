@@ -7,6 +7,8 @@ from torchvision import transforms
 import wget
 import torch.nn as nn
 
+device = torch.device('cpu')
+
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -77,7 +79,6 @@ def predict(model, categories, image):
 
 def main():
     st.title('Pretrained model demo')
-    device = torch.device('cpu')
     model = load_model()
     model = model.to(device)
     categories = [0,1,2,3,4,5,6,7,8,9]

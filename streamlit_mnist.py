@@ -50,7 +50,12 @@ def load_image():
         return None
 
 def load_model():
-    model = torch.load('mnist_model.pt')
+    if torch.cuda.is_available():
+        map_location = lambda storage, loc: storage.cuda()
+    else:
+        map_location = 'cpu'
+        
+    model = torch.load('mnist_model.pt', map_location=map_location)
     model.eval()
     return model
 
